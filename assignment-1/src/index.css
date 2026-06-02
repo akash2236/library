@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  /* HSL Color System */
+  --hue-primary: 262;   /* Indigo/Violet */
+  --hue-success: 142;   /* Emerald Green */
+  --hue-warning: 38;    /* Amber Gold */
+  --hue-danger: 350;    /* Rose Red */
+  --hue-info: 200;      /* Ocean Blue */
+
+  /* Theme: Premium Slate Dark (Default) */
+  --bg-app: hsl(240, 10%, 4%);
+  --bg-surface: hsl(240, 10%, 8%);
+  --bg-surface-hover: hsl(240, 10%, 12%);
+  --bg-surface-active: hsl(240, 10%, 15%);
+  
+  --border-light: hsla(240, 10%, 20%, 0.4);
+  --border-medium: hsla(240, 10%, 20%, 0.8);
+  --border-glow: hsla(var(--hue-primary), 80%, 65%, 0.2);
+
+  --text-main: hsl(0, 0%, 96%);
+  --text-secondary: hsl(240, 4%, 70%);
+  --text-muted: hsl(240, 4%, 50%);
+
+  --color-primary: hsl(var(--hue-primary), 85%, 60%);
+  --color-primary-hover: hsl(var(--hue-primary), 85%, 55%);
+  --color-primary-active: hsl(var(--hue-primary), 85%, 48%);
+  --color-primary-glow: hsla(var(--hue-primary), 85%, 60%, 0.25);
+
+  --color-success: hsl(var(--hue-success), 75%, 45%);
+  --color-success-hover: hsl(var(--hue-success), 75%, 40%);
+  --color-success-glow: hsla(var(--hue-success), 75%, 45%, 0.25);
+
+  --color-warning: hsl(var(--hue-warning), 85%, 50%);
+  --color-warning-hover: hsl(var(--hue-warning), 85%, 45%);
+  --color-warning-glow: hsla(var(--hue-warning), 85%, 50%, 0.25);
+
+  --color-danger: hsl(var(--hue-danger), 80%, 55%);
+  --color-danger-hover: hsl(var(--hue-danger), 80%, 50%);
+  --color-danger-glow: hsla(var(--hue-danger), 80%, 55%, 0.25);
+
+  --color-info: hsl(var(--hue-info), 80%, 55%);
+  --color-info-hover: hsl(var(--hue-info), 80%, 50%);
+  --color-info-glow: hsla(var(--hue-info), 80%, 55%, 0.25);
+
+  /* Fonts */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px -2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 16px 40px -8px rgba(0, 0, 0, 0.8);
+  --shadow-glow: 0 0 25px -5px hsla(var(--hue-primary), 85%, 60%, 0.35);
+
+  /* Radius */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Light Theme overrides */
+.light-theme {
+  --bg-app: hsl(240, 15%, 97%);
+  --bg-surface: hsl(0, 0%, 100%);
+  --bg-surface-hover: hsl(240, 10%, 94%);
+  --bg-surface-active: hsl(240, 10%, 90%);
+
+  --border-light: hsla(240, 10%, 80%, 0.3);
+  --border-medium: hsla(240, 10%, 80%, 0.6);
+  --border-glow: hsla(var(--hue-primary), 85%, 60%, 0.1);
+
+  --text-main: hsl(240, 10%, 8%);
+  --text-secondary: hsl(240, 6%, 35%);
+  --text-muted: hsl(240, 6%, 55%);
+
+  --color-primary: hsl(var(--hue-primary), 80%, 55%);
+  --color-primary-hover: hsl(var(--hue-primary), 80%, 48%);
+  --color-primary-active: hsl(var(--hue-primary), 80%, 42%);
+  --color-primary-glow: hsla(var(--hue-primary), 80%, 55%, 0.15);
+
+  --shadow-sm: 0 2px 8px -2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 16px 40px -8px rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0 0 25px -5px hsla(var(--hue-primary), 85%, 60%, 0.2);
+}
+
+/* Global Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-app);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--bg-app);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Keyboard Accessibility Focus */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+}
+
+/* Background grid glow pattern */
+.bg-grid-glow {
+  position: fixed;
+  inset: 0;
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, var(--border-light) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border-light) 1px, transparent 1px);
+  mask-image: radial-gradient(circle 800px at 50% 30%, black, transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-orb-purple {
+  position: fixed;
+  top: -10%;
+  left: 20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, hsla(var(--hue-primary), 80%, 60%, 0.12) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-orb-blue {
+  position: fixed;
+  bottom: -10%;
+  right: 15%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, hsla(var(--hue-info), 80%, 60%, 0.08) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* App Container */
+#root {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}

@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  /* HSL Color System (Brand: Slate & Purple) */
+  --hue-primary: 262;   /* Indigo/Violet */
+  --hue-success: 142;   /* Emerald Green */
+  --hue-warning: 38;    /* Amber Gold */
+  --hue-danger: 350;    /* Rose Red */
+  --hue-info: 200;      /* Ocean Blue */
+
+  /* Theme: Slate Dark */
+  --bg-app: hsl(240, 10%, 4%);
+  --bg-surface: hsl(240, 10%, 8%);
+  --bg-surface-hover: hsl(240, 10%, 12%);
+  --bg-surface-active: hsl(240, 10%, 15%);
+  
+  --border-light: hsla(240, 10%, 20%, 0.4);
+  --border-medium: hsla(240, 10%, 20%, 0.8);
+  --border-glow: hsla(var(--hue-primary), 80%, 65%, 0.2);
+
+  --text-main: hsl(0, 0%, 96%);
+  --text-secondary: hsl(240, 4%, 70%);
+  --text-muted: hsl(240, 4%, 50%);
+
+  --color-primary: hsl(var(--hue-primary), 85%, 60%);
+  --color-primary-hover: hsl(var(--hue-primary), 85%, 55%);
+  --color-primary-active: hsl(var(--hue-primary), 85%, 48%);
+  --color-primary-glow: hsla(var(--hue-primary), 85%, 60%, 0.25);
+
+  --color-success: hsl(var(--hue-success), 75%, 45%);
+  --color-success-hover: hsl(var(--hue-success), 75%, 40%);
+  --color-success-glow: hsla(var(--hue-success), 75%, 45%, 0.25);
+
+  --color-warning: hsl(var(--hue-warning), 85%, 50%);
+  --color-warning-hover: hsl(var(--hue-warning), 85%, 45%);
+  --color-warning-glow: hsla(var(--hue-warning), 85%, 50%, 0.25);
+
+  --color-danger: hsl(var(--hue-danger), 80%, 55%);
+  --color-danger-hover: hsl(var(--hue-danger), 80%, 50%);
+  --color-danger-glow: hsla(var(--hue-danger), 80%, 55%, 0.25);
+
+  --color-info: hsl(var(--hue-info), 80%, 55%);
+  --color-info-hover: hsl(var(--hue-info), 80%, 50%);
+  --color-info-glow: hsla(var(--hue-info), 80%, 55%, 0.25);
+
+  /* Fonts */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px -2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 16px 40px -8px rgba(0, 0, 0, 0.8);
+  --shadow-glow: 0 0 25px -5px hsla(var(--hue-primary), 85%, 60%, 0.35);
+
+  /* Radius */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base resets and animations */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-app);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Background elements */
+.bg-grid-glow {
+  position: fixed;
+  inset: 0;
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, var(--border-light) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border-light) 1px, transparent 1px);
+  mask-image: radial-gradient(circle 800px at 50% 20%, black, transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-orb-purple {
+  position: fixed;
+  top: -10%;
+  left: 30%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, hsla(var(--hue-primary), 85%, 60%, 0.1) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+}

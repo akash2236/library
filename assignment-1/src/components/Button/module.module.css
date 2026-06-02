@@ -1,0 +1,189 @@
+/* Button Component Stylesheet (BEM with CSS Modules) */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  text-decoration: none;
+  transition: 
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast),
+    color var(--transition-fast);
+  outline: none;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Button hover lift effect */
+.btn:hover:not(.btn--disabled) {
+  transform: translateY(-2px);
+}
+
+/* Button 3D active pressing effect */
+.btn:active:not(.btn--disabled) {
+  transform: translateY(0) scale(0.97);
+}
+
+/* Elements */
+.btn__content {
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.btn:hover:not(.btn--disabled) .btn__icon {
+  transform: scale(1.1);
+}
+
+.btn__icon--right {
+  order: 2;
+}
+
+/* Modifiers - Sizes */
+.btn--sm {
+  font-size: 0.8125rem;
+  padding: 6px 14px;
+  border-radius: var(--radius-xs);
+}
+.btn--sm .btn__icon {
+  font-size: 0.875rem;
+}
+
+.btn--md {
+  font-size: 0.9375rem;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+}
+
+.btn--lg {
+  font-size: 1.0625rem;
+  padding: 14px 28px;
+  border-radius: var(--radius-md);
+}
+
+/* Modifiers - Variants */
+
+/* Primary - Glowing Royal Indigo */
+.btn--primary {
+  background: linear-gradient(135deg, var(--color-primary), hsl(var(--hue-primary), 90%, 50%));
+  color: hsl(0, 0%, 100%);
+  border-color: hsla(var(--hue-primary), 80%, 70%, 0.3);
+  box-shadow: var(--shadow-sm), 0 4px 12px hsla(var(--hue-primary), 80%, 50%, 0.2);
+}
+.btn--primary:hover:not(.btn--disabled) {
+  background: linear-gradient(135deg, var(--color-primary-hover), hsl(var(--hue-primary), 90%, 45%));
+  box-shadow: var(--shadow-md), 0 6px 20px hsla(var(--hue-primary), 85%, 50%, 0.35);
+  border-color: hsla(var(--hue-primary), 80%, 75%, 0.4);
+}
+.btn--primary:active:not(.btn--disabled) {
+  background: var(--color-primary-active);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Secondary - Premium Translucent Glass */
+.btn--secondary {
+  background: var(--bg-surface-hover);
+  color: var(--text-main);
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-sm);
+}
+.btn--secondary:hover:not(.btn--disabled) {
+  background: var(--bg-surface-active);
+  border-color: var(--text-muted);
+}
+.btn--secondary:active:not(.btn--disabled) {
+  background: var(--bg-surface);
+}
+
+/* Outline - Elegant border with neon glow on hover */
+.btn--outline {
+  background: transparent;
+  color: var(--text-main);
+  border-color: var(--border-medium);
+}
+.btn--outline:hover:not(.btn--disabled) {
+  background: var(--color-primary-glow);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: 0 0 15px -2px var(--color-primary-glow);
+}
+.btn--outline:active:not(.btn--disabled) {
+  background: hsla(var(--hue-primary), 80%, 65%, 0.25);
+}
+
+/* Ghost - Clean and minimalistic */
+.btn--ghost {
+  background: transparent;
+  color: var(--text-secondary);
+}
+.btn--ghost:hover:not(.btn--disabled) {
+  background: var(--bg-surface-hover);
+  color: var(--text-main);
+}
+.btn--ghost:active:not(.btn--disabled) {
+  background: var(--bg-surface-active);
+}
+
+/* Success - Deep Emerald */
+.btn--success {
+  background: linear-gradient(135deg, var(--color-success), hsl(var(--hue-success), 75%, 38%));
+  color: hsl(0, 0%, 100%);
+  border-color: hsla(var(--hue-success), 70%, 55%, 0.3);
+  box-shadow: var(--shadow-sm), 0 4px 12px hsla(var(--hue-success), 70%, 40%, 0.15);
+}
+.btn--success:hover:not(.btn--disabled) {
+  background: linear-gradient(135deg, var(--color-success-hover), hsl(var(--hue-success), 75%, 33%));
+  box-shadow: var(--shadow-md), 0 6px 20px hsla(var(--hue-success), 75%, 40%, 0.25);
+}
+
+/* Warning - Warm Amber Gold */
+.btn--warning {
+  background: linear-gradient(135deg, var(--color-warning), hsl(var(--hue-warning), 85%, 42%));
+  color: hsl(240, 10%, 4%); /* Dark text for warning visibility */
+  border-color: hsla(var(--hue-warning), 80%, 60%, 0.3);
+  box-shadow: var(--shadow-sm), 0 4px 12px hsla(var(--hue-warning), 80%, 45%, 0.15);
+}
+.btn--warning:hover:not(.btn--disabled) {
+  background: linear-gradient(135deg, var(--color-warning-hover), hsl(var(--hue-warning), 85%, 38%));
+  box-shadow: var(--shadow-md), 0 6px 20px hsla(var(--hue-warning), 80%, 45%, 0.25);
+}
+
+/* Danger - Rose Red */
+.btn--danger {
+  background: linear-gradient(135deg, var(--color-danger), hsl(var(--hue-danger), 80%, 48%));
+  color: hsl(0, 0%, 100%);
+  border-color: hsla(var(--hue-danger), 75%, 60%, 0.3);
+  box-shadow: var(--shadow-sm), 0 4px 12px hsla(var(--hue-danger), 75%, 45%, 0.15);
+}
+.btn--danger:hover:not(.btn--disabled) {
+  background: linear-gradient(135deg, var(--color-danger-hover), hsl(var(--hue-danger), 80%, 42%));
+  box-shadow: var(--shadow-md), 0 6px 20px hsla(var(--hue-danger), 75%, 45%, 0.25);
+}
+
+/* Disabled state */
+.btn--disabled {
+  opacity: 0.45;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+  border-color: var(--border-medium) !important;
+  background: var(--bg-surface) !important;
+  color: var(--text-muted) !important;
+}

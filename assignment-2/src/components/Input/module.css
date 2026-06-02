@@ -1,0 +1,141 @@
+/* Input Component Stylesheet (BEM with CSS Modules) */
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  font-family: var(--font-sans);
+  text-align: left;
+}
+
+.input-group__label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-main);
+  user-select: none;
+}
+
+.input-group__required {
+  color: var(--color-danger);
+}
+
+.input-group__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-group__icon {
+  position: absolute;
+  left: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: color var(--transition-fast);
+}
+
+.input-group__field {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: var(--text-main);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  outline: none;
+  box-shadow: var(--shadow-sm);
+  transition: 
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.input-group__field::placeholder {
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
+/* Hover and Focus States */
+.input-group__field:hover:not(:disabled) {
+  border-color: var(--text-muted);
+}
+
+.input-group__field:focus:not(:disabled) {
+  border-color: var(--color-primary);
+  background-color: var(--bg-surface-hover);
+  box-shadow: 0 0 0 4px var(--color-primary-glow), var(--shadow-sm);
+}
+
+/* Icon Offset Modifier */
+.input-group--has-icon .input-group__field {
+  padding-left: 44px;
+}
+
+.input-group--has-icon .input-group__field:focus + .input-group__icon,
+.input-group--has-icon:focus-within .input-group__icon {
+  color: var(--color-primary);
+}
+
+/* Disabled State Modifier */
+.input-group--disabled {
+  opacity: 0.6;
+}
+
+.input-group--disabled .input-group__field {
+  cursor: not-allowed;
+  background-color: var(--bg-surface);
+  border-color: var(--border-light);
+}
+
+.input-group--disabled .input-group__label {
+  cursor: not-allowed;
+}
+
+/* Error State Modifier & Shake Animation */
+.input-group--error .input-group__field {
+  border-color: var(--color-danger);
+  box-shadow: 0 0 0 1px var(--color-danger), var(--shadow-sm);
+}
+
+.input-group--error .input-group__field:focus {
+  box-shadow: 0 0 0 4px var(--color-danger-glow), var(--shadow-sm);
+}
+
+.input-group--error .input-group__container {
+  animation: wobble 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+.input-group__error-msg {
+  font-size: 0.8125rem;
+  color: var(--color-danger);
+  font-weight: 500;
+  margin-top: -2px;
+}
+
+.input-group__helper-msg {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin-top: -2px;
+}
+
+/* Wobble Animation Keyframes */
+@keyframes wobble {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}

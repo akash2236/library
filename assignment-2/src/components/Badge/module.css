@@ -1,0 +1,151 @@
+/* Badge Component Stylesheet (BEM with CSS Modules) */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  transition: 
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+/* Elements */
+.badge__content {
+  display: inline-flex;
+  align-items: center;
+}
+
+.badge__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Modifiers - Sizes */
+.badge--sm {
+  font-size: 0.6875rem;
+  padding: 3px 8px;
+  height: 18px;
+}
+.badge--sm .badge__icon {
+  font-size: 0.75rem;
+}
+
+.badge--md {
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  height: 22px;
+}
+.badge--md .badge__icon {
+  font-size: 0.8125rem;
+}
+
+.badge--lg {
+  font-size: 0.8125rem;
+  padding: 6px 16px;
+  height: 28px;
+}
+.badge--lg .badge__icon {
+  font-size: 0.875rem;
+}
+
+/* Modifiers - Variants x Colors combination using CSS custom properties */
+
+/* Filled Variant Colors */
+.badge--filled.badge--primary {
+  background-color: var(--color-primary);
+  color: hsl(0, 0%, 100%);
+}
+.badge--filled.badge--secondary {
+  background-color: var(--border-medium);
+  color: var(--text-main);
+}
+.badge--filled.badge--success {
+  background-color: var(--color-success);
+  color: hsl(0, 0%, 100%);
+}
+.badge--filled.badge--warning {
+  background-color: var(--color-warning);
+  color: hsl(240, 10%, 4%);
+}
+.badge--filled.badge--danger {
+  background-color: var(--color-danger);
+  color: hsl(0, 0%, 100%);
+}
+.badge--filled.badge--info {
+  background-color: var(--color-info);
+  color: hsl(0, 0%, 100%);
+}
+
+/* Outline Variant Colors */
+.badge--outline {
+  background-color: transparent;
+}
+.badge--outline.badge--primary {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.badge--outline.badge--secondary {
+  color: var(--text-secondary);
+  border-color: var(--border-medium);
+}
+.badge--outline.badge--success {
+  color: var(--color-success);
+  border-color: var(--color-success);
+}
+.badge--outline.badge--warning {
+  color: var(--color-warning);
+  border-color: var(--color-warning);
+}
+.badge--outline.badge--danger {
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+.badge--outline.badge--info {
+  color: var(--color-info);
+  border-color: var(--color-info);
+}
+
+/* Glass Variant Colors (Glossy translucent neon background) */
+.badge--glass.badge--primary {
+  background-color: var(--color-primary-glow);
+  color: hsl(var(--hue-primary), 85%, 70%);
+  border-color: hsla(var(--hue-primary), 85%, 60%, 0.25);
+}
+.badge--glass.badge--secondary {
+  background-color: var(--border-light);
+  color: var(--text-secondary);
+  border-color: var(--border-medium);
+}
+.badge--glass.badge--success {
+  background-color: var(--color-success-glow);
+  color: hsl(var(--hue-success), 75%, 60%);
+  border-color: hsla(var(--hue-success), 75%, 45%, 0.25);
+}
+.badge--glass.badge--warning {
+  background-color: var(--color-warning-glow);
+  color: hsl(var(--hue-warning), 85%, 65%);
+  border-color: hsla(var(--hue-warning), 85%, 50%, 0.25);
+}
+.badge--glass.badge--danger {
+  background-color: var(--color-danger-glow);
+  color: hsl(var(--hue-danger), 80%, 70%);
+  border-color: hsla(var(--hue-danger), 80%, 55%, 0.25);
+}
+.badge--glass.badge--info {
+  background-color: var(--color-info-glow);
+  color: hsl(var(--hue-info), 80%, 70%);
+  border-color: hsla(var(--hue-info), 80%, 55%, 0.25);
+}
