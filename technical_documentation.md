@@ -1,9 +1,8 @@
 # TECHNICAL SPECIFICATION & SYSTEM DOCUMENTATION REPORT
 ## React Component Library Suite & Responsive E-Commerce Application
 
-**Document ID:** SPEC-2026-MARKET-01  
-**Project Scope:** Assignment 1 & Assignment 2  
-**Status:** Completed & Verified  
+**Project Scope:** Assignment 1 (Component Library) & Assignment 2 (E-Commerce Storefront)  
+**Status:** Completed, Compiled & Verified  
 **Active Target Branch:** `main`  
 **Remote Git Repository:** [https://github.com/akash2236/library.git](https://github.com/akash2236/library.git)  
 **Date of Documentation:** June 2, 2026  
@@ -21,243 +20,390 @@
 | **Iconography Engine** | Lucide React Icon Package |
 | **Accessibility Grade** | W3C WAI-ARIA Web Standard Compliant |
 | **Responsive Grid System** | Mobile-First Media Queries (stacked to sticky multi-columns) |
-| **Staged Git Commit ID** | `d47e87f` (docs: add comprehensive technical PPT presentation deck) |
+| **Staged Git Commit ID** | `639d5fb` (docs: add formal project report word-template specs) |
 
 ---
 
 ## TABLE OF CONTENTS
-1. **EXECUTIVE BRIEFING & REQUIREMENT SUMMARY**
-2. **GLOBAL SYSTEM DESIGN & HSL TOKEN PALETTE**
-3. **ASSIGNMENT 1: COMPONENT LIBRARY TECHNICAL DATA SHEETS**
-   * *3.1 Button Component Specifications*
-   * *3.2 Card Component Specifications*
-   * *3.3 Input Component Specifications*
-   * *3.4 Badge Component Specifications*
-   * *3.5 Alert Component Specifications*
-   * *3.6 Modal Component Specifications*
-4. **ASSIGNMENT 2: E-COMMERCE PORTAL FUNCTIONAL ANALYSIS**
-   * *4.1 Mobile-First Responsive Grid Breakdown*
-   * *4.2 Product Media Gallery State Engine*
-   * *4.3 Estimations & Pricing Calculation Systems*
-   * *4.4 Interactive Customer Reviews Feed*
-   * *4.5 Simulated Portal Cart & Checkout Overlay*
-5. **DRY SYSTEM DESIGN & FILE DIRECTORY REGISTER**
-6. **INSTALLATION GUIDE & COMPILATION PROTOCOLS**
-7. **VERIFICATION REPORT & GIT PUSH LOGS**
+1. **EXECUTIVE BRIEFING & SYSTEM REQUIREMENTS**
+2. **GLOBAL DESIGN SYSTEM & HSL TOKEN MATHEMATICS**
+3. **ASSIGNMENT 1: REUSABLE COMPONENT SPECIFICATIONS & JSX MOCKUPS**
+   * *3.1 Button Component Data Sheet*
+   * *3.2 Card Component Data Sheet*
+   * *3.3 Input Component Data Sheet*
+   * *3.4 Badge Component Data Sheet*
+   * *3.5 Alert Component Data Sheet*
+   * *3.6 Modal Component Data Sheet*
+4. **ASSIGNMENT 2: E-COMMERCE PORTAL ARCHITECTURE & CONTROLLERS**
+   * *4.1 Mobile-First Media Query Grid Layouts*
+   * *4.2 Product Gallery State Controller*
+   * *4.3 Estimated Surcharges & Pricing Computations*
+   * *4.4 Interactive Customer Reviews State Array*
+   * *4.5 Cart Modal Portal & Secure Checkout Simulator*
+5. **COMPREHENSIVE FILE DIRECTORY & STRUCTURAL TREE**
+6. **INSTALLATION PROTOCOLS & LOCAL ENVIRONMENT DEPLOYMENT**
+7. **BUILD COMPILATION & VERIFIED GIT PRODUCTION LOGS**
 
 ---
 
-## 1. EXECUTIVE BRIEFING & REQUIREMENT SUMMARY
+## 1. EXECUTIVE BRIEFING & SYSTEM REQUIREMENTS
 
-This technical document details the engineering principles and structural implementation of two core frontend systems located in the `market/` directory:
+This report provides the full technical specification for two integrated frontend applications located inside the `market/` workspace root:
 
-1.  **System A (`assignment-1`):** A foundational React Component Library containing six decoupled, highly parameterized UI blocks built for isolated reusability. Styling is scoped locally per folder using CSS Modules with BEM class declarations, bypassing global style leaks. Interactive states integrate keyboard traps, focus loops, and keyframe wobble transitions.
-2.  **System B (`assignment-2`):** A responsive, single-product e-commerce dashboard serving as an active demonstrator for System A. Components are imported directly from the library without duplicate codebase overrides (100% DRY compliance). It models interactive color dials, responsive gallery thumbnail shifts, dynamic cushion foam size price surcharges, live user review submissions, and a simulated secure portaled checkout drawer.
+*   **Assignment 1 (`assignment-1`):** A custom React Component Library composed of six modular, accessible elements (`Button`, `Card`, `Input`, `Badge`, `Alert`, `Modal`). By utilizing local **CSS Modules** scoped strictly under the **BEM naming convention**, global namespace pollution is entirely avoided. Every component integrates deep accessibility features (focus trapping, ESC bindings, label mappings) and micro-interactions.
+*   **Assignment 2 (`assignment-2`):** An immersive e-commerce single-product detailing dashboard modeled after a luxury cyberpunk audio company. The storefront complies with strict **DRY (Don't Repeat Yourself)** principles by copying the entire compiled components folder directly from Assignment 1 and importing them natively. It integrates color chassis selections, cushion thickness surcharges, cart addition aggregates, a verified reviews feed, and portal-based checkout modal cards.
 
 ---
 
-## 2. GLOBAL SYSTEM DESIGN & HSL TOKEN PALETTE
+## 2. GLOBAL DESIGN SYSTEM & HSL TOKEN MATHEMATICS
 
-Both systems inherit variables from a cohesive dark-mode first design tokens library compiled in `index.css`:
+The system utilizes an aesthetic dark-theme built on **HSL (Hue, Saturation, Lightness)** color coordinate tokens. By keeping saturation moderate and lightness extremely dark in background surfaces, it minimizes developer/user eye strain while making active glowing borders stand out.
 
 ```css
 :root {
   /* HSL Color System (Brand: Slate & Purple) */
-  --hue-primary: 262;   /* Indigo/Violet */
-  --hue-success: 142;   /* Emerald Green */
-  --hue-warning: 38;    /* Amber Gold */
-  --hue-danger: 350;    /* Rose Red */
-  --hue-info: 200;      /* Ocean Blue */
+  --hue-primary: 262;   /* Royal violet glow: maps branding and buttons */
+  --hue-success: 142;   /* Emerald green: denotes positive alerts, in-stock status */
+  --hue-warning: 38;    /* Gold/Amber: marks verified rating stars, warning alerts */
+  --hue-danger: 350;    /* Crimson rose: scopes invalid inputs and close controls */
+  --hue-info: 200;      /* Blue: anchors hyperlinks and technical info tabs */
 
   /* Surface and Background Schemes */
-  --bg-app: hsl(240, 10%, 4%);
-  --bg-surface: hsl(240, 10%, 8%);
-  --bg-surface-hover: hsl(240, 10%, 12%);
-  --bg-surface-active: hsl(240, 10%, 15%);
+  --bg-app: hsl(240, 10%, 4%);                 /* Ultra-dark slate backdrop base */
+  --bg-surface: hsl(240, 10%, 8%);             /* Elevated card and sidebar blocks */
+  --bg-surface-hover: hsl(240, 10%, 12%);       /* Subtle mouse hover light highlights */
+  --bg-surface-active: hsl(240, 10%, 15%);      /* Tap/Click visual feedback plates */
   
-  --border-light: hsla(240, 10%, 20%, 0.4);
-  --border-medium: hsla(240, 10%, 20%, 0.8);
-  --border-glow: hsla(var(--hue-primary), 80%, 65%, 0.2);
-
-  /* Font Families */
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-display: 'Space Grotesk', sans-serif;
+  --border-light: hsla(240, 10%, 20%, 0.4);    /* Soft glass divider boundaries */
+  --border-medium: hsla(240, 10%, 20%, 0.8);   /* Bounding structural card lines */
+  --border-glow: hsla(var(--hue-primary), 80%, 65%, 0.2); /* Neon primary drop shadows */
 }
 ```
 
 ---
 
-## 3. ASSIGNMENT 1: COMPONENT LIBRARY TECHNICAL DATA SHEETS
+## 3. ASSIGNMENT 1: REUSABLE COMPONENT SPECIFICATIONS & JSX MOCKUPS
 
-### 3.1 Button Component Specifications
-The `Button` represents a configurable touch interaction block that scales dynamically.
-*   **Props Framework:**
-    *   `variant` (*enum*): `'primary'`, `'secondary'`, `'outline'`, `'ghost'`, `'success'`, `'warning'`, `'danger'`. Sets background gradients or transparent neon borders.
-    *   `size` (*enum*): `'sm'`, `'md'`, `'lg'`. Sets sizing padding models.
-    *   `disabled` (*boolean*): Stops handlers, reduces opacity to `0.45`, sets cursor to `not-allowed`.
-    *   `icon` (*node*): Prefix Lucide graphic.
-    *   `onClick` (*function*): Trigger event action.
-*   **BEM Modifier Matrix:**
-    *   `.btn` - Core structural layout.
-    *   `.btn--[variant]` - Handles gradient styling, outlines, and glows.
-    *   `.btn--[size]` - Controls font sizing and boundaries.
-    *   `.btn--disabled` - Strip hover animations.
+### 3.1 Button Component Data Sheet
+A tactical touch control that dynamically shifts background states and sizes.
+*   **Prop Registers:**
+    *   `variant` (*enum*): `'primary'`, `'secondary'`, `'outline'`, `'ghost'`, `'success'`, `'warning'`, `'danger'`. Default: `'primary'`.
+    *   `size` (*enum*): `'sm'`, `'md'`, `'lg'`. Default: `'md'`.
+    *   `disabled` (*boolean*): Reduces opacity to `45%`, sets cursor to `not-allowed`, and strips click triggers.
+    *   `icon` (*node*): Prefix Lucide icon graphic.
+*   **CSS BEM Selectors:** `.btn`, `.btn--primary`, `.btn--disabled`, `.btn__icon`, `.btn__content`.
+*   **JSX Utilisation Example:**
+    ```jsx
+    import { Button } from '../components';
+    import { ShoppingBag } from 'lucide-react';
+    
+    <Button 
+      variant="primary" 
+      size="lg" 
+      icon={<ShoppingBag size={18} />} 
+      onClick={handleAddToCart}
+    >
+      Add to Spatial Cart
+    </Button>
+    ```
 
-### 3.2 Card Component Specifications
-An elevated bounding element providing depth layering.
-*   **Props Framework:**
-    *   `title` (*node*): Main header title.
-    *   `subtitle` (*node*): Gray subtitle label.
-    *   `children` (*node*): Primary nested elements.
-    *   `footer` (*node*): Bottom panel slot.
-    *   `headerActions` (*node*): Top-right slot for accessory icons.
-    *   `variant` (*enum*): `'default'`, `'glass'`, `'flat'`, `'bordered'`.
-    *   `interactive` (*boolean*): Enables hover transitions.
-*   **BEM Modifier Matrix:**
-    *   `.card` - Base layout card surface.
-    *   `.card--glass` - Translucent frosted backdrop blur properties.
-    *   `.card--bordered` - Renders top-edge violet-cyan linear gradient borders.
-    *   `.card--interactive` - Activates hover translations (`translateY(-4px)`).
+---
 
-### 3.3 Input Component Specifications
-An accessible input control containing automated validation warnings.
-*   **Props Framework:**
-    *   `label` (*string*): Floating field tag.
-    *   `placeholder` (*string*): Ghost text inside empty fields.
-    *   `type` (*string*): Standard HTML types (e.g. `'text'`, `'email'`, `'password'`).
-    *   `error` (*string*): Triggers invalid statuses, error alerts, and wobbles.
-    *   `helperText` (*string*): Informational footnote message.
-    *   `icon` (*node*): Inline leading icon prefix.
-*   **BEM Modifier Matrix:**
-    *   `.input-group` - Stack layout.
-    *   `.input-group--error` - Binds a horizontal keyframe shake wobble.
-    *   `.input-group__field` - Focus rings and transitions.
-    *   `.input-group__icon` - Anchors icon alignment inside the field.
+### 3.2 Card Component Data Sheet
+A depth-layer container for displaying details with structural separation.
+*   **Prop Registers:**
+    *   `title` (*node*): Bolds header titles.
+    *   `subtitle` (*node*): Displays small subtitle footnotes.
+    *   `children` (*node, required*): Central card body slot.
+    *   `footer` (*node*): Standardized checkout/buy button footer row.
+    *   `headerActions` (*node*): Aligns action tags to the top-right corner.
+    *   `interactive` (*boolean*): Activates vertical translation mouse lifts (`translateY(-4px)`).
+*   **CSS BEM Selectors:** `.card`, `.card--glass`, `.card--bordered`, `.card--interactive`, `.card__header`, `.card__footer`.
+*   **JSX Utilisation Example:**
+    ```jsx
+    import { Card, Badge } from '../components';
+    
+    <Card 
+      title="Hardware Cushion Foam" 
+      subtitle="Option Selection"
+      variant="bordered"
+      headerActions={<Badge color="success">Verified</Badge>}
+    >
+      <p>50mm cooling gel foam reduces temperature buildup for 10-hour sessions.</p>
+    </Card>
+    ```
 
-### 3.4 Badge Component Specifications
-A compact tagging pill for conveying categories, tags, or statuses.
-*   **Props Framework:**
+---
+
+### 3.3 Input Component Data Sheet
+A text-field equipped with dynamic error detection, helper lines, and invalid bindings.
+*   **Prop Registers:**
+    *   `label` (*string*): Input header tag.
+    *   `placeholder` (*string*): Ghost text indicators.
+    *   `type` (*string*): Standard HTML text types. Default: `'text'`.
+    *   `error` (*string*): Bolds error labels, paints borders red, and fires shake wobbles.
+    *   `icon` (*node*): Inline icon aligned inside the left margin.
+*   **CSS BEM Selectors:** `.input-group`, `.input-group--error`, `.input-group__field`, `.input-group__icon`.
+*   **JSX Utilisation Example:**
+    ```jsx
+    import { Input } from '../components';
+    import { User } from 'lucide-react';
+    
+    <Input 
+      label="Your Full Name"
+      placeholder="e.g. John Doe"
+      icon={<User size={16} />}
+      value={author}
+      error={nameError}
+      onChange={(e) => setAuthor(e.target.value)}
+      required
+    />
+    ```
+
+---
+
+### 3.4 Badge Component Data Sheet
+A compact pill tagging element for drawing attention to statuses.
+*   **Prop Registers:**
     *   `text` (*string*): Pill label text.
-    *   `color` (*enum*): `'primary'`, `'secondary'`, `'success'`, `'warning'`, `'danger'`, `'info'`.
-    *   `size` (*enum*): `'sm'`, `'md'`, `'lg'`.
-    *   `variant` (*enum*): `'filled'`, `'outline'`, `'glass'`.
-    *   `icon` (*node*): Inline icon element.
-*   **BEM Modifier Matrix:**
-    *   `.badge` - Binds full border radius (`9999px`) and uppercase letter-spacings.
-    *   `.badge--[size]` - Multiplies padding margins.
-    *   `.badge--glass` - Scopes semi-transparent backgrounds with matching font tints.
+    *   `color` (*enum*): `'primary'`, `'secondary'`, `'success'`, `'warning'`, `'danger'`, `'info'`. Default: `'primary'`.
+    *   `size` (*enum*): `'sm'`, `'md'`, `'lg'`. Default: `'md'`.
+    *   `variant` (*enum*): `'filled'`, `'outline'`, `'glass'`. Default: `'glass'`.
+    *   `icon` (*node*): Small prefix inline graphic.
+*   **CSS BEM Selectors:** `.badge`, `.badge--sm`, `.badge--glass`, `.badge__icon`.
+*   **JSX Utilisation Example:**
+    ```jsx
+    import { Badge } from '../components';
+    import { Sparkles } from 'lucide-react';
+    
+    <Badge 
+      color="primary" 
+      variant="glass" 
+      size="sm"
+      icon={<Sparkles size={10} />}
+    >
+      Holo Spatial Audio Enabled
+    </Badge>
+    ```
 
-### 3.5 Alert Component Specifications
-A system event notice panel featuring dismiss animations.
-*   **Props Framework:**
-    *   `type` (*enum*): `'success'`, `'warning'`, `'error'`, `'info'`. Maps Lucide warning symbols.
+---
+
+### 3.5 Alert Component Data Sheet
+A dismissible system notification banner displaying warning information.
+*   **Prop Registers:**
+    *   `type` (*enum*): `'success'`, `'warning'`, `'error'`, `'info'`. Default: `'info'`.
     *   `title` (*string*): Strong alert title text.
-    *   `message` (*node*): Alert message context.
-    *   `onClose` (*function*): Closes banner using fading delays.
-*   **BEM Modifier Matrix:**
-    *   `.alert` - Scrapes viewport bounds and slides down with fade keyframes.
-    *   `.alert--[type]` - Sets alert state colors (e.g., emerald for success, red for danger).
-    *   `.alert__close` - Translucent click dismiss button.
-
-### 3.6 Modal Component Specifications
-An overlay dialog taking complete UI focus.
-*   **Props Framework:**
-    *   `isOpen` (*boolean*): Modal mount toggle.
-    *   `title` (*string*): Strong modal header label.
-    *   `children` (*node*): Primary nested elements inside modal.
-    *   `onClose` (*function*): Trigger callback to close overlay.
-    *   `footer` (*node*): Dialog controls footer slot.
-    *   `size` (*enum*): `'sm'`, `'md'`, `'lg'`, `'xl'`, `'full'`.
-*   **A11y (Accessibility Rules):**
-    *   **Focus Trap:** Limits keyboard focus using tab loops inside the viewport overlay.
-    *   **Background Scroll-Lock:** Temporarily hides vertical scrollbars on document body.
-    *   **Portal Mount:** Safely appended outside normal parent grids inside `document.body`.
+    *   `message` (*node*): Main alert description body.
+    *   `onClose` (*function*): Trigger event that closes the alert using transition fade out delays.
+*   **CSS BEM Selectors:** `.alert`, `.alert--success`, `.alert--error`, `.alert__content`, `.alert__close`.
+*   **JSX Utilisation Example:**
+    ```jsx
+    import { Alert } from '../components';
+    
+    <Alert 
+      type="success"
+      title="Secure Checkout Succeeded!"
+      message="Your spatial transaction has been processed. Check your mail address."
+      onClose={handleDismissAlert}
+    />
+    ```
 
 ---
 
-## 4. ASSIGNMENT 2: E-Commerce PORTAL FUNCTIONAL ANALYSIS
-
-### 4.1 Mobile-First Responsive Grid Breakdown
-To accommodate variable screen profiles, `ProductPage.module.css` implements mobile-first layout rules:
-*   **Mobile Viewport (`< 640px`):** Flex direction is locked to `column`. Main content grids, specifications, and related products stack sequentially at 100% width.
-*   **Tablet Viewport (`640px - 1024px`):** Split layout grid. Column 1 hosts the core gallery and details; Column 2 displays configuration tools.
-*   **Desktop Viewport (`>= 1024px`):** Multi-column dashboard grid. Gallery, specs, and customer reviews expand on the left. The sidebar buying card remains locked to the right side using a sticky coordinate overlay (`position: sticky`, `top: 40px`).
-
-### 4.2 Product Media Gallery State Engine
-Tracks the index of the actively highlighted product image. Clicking thumbnail buttons swaps indices, rendering the matching high-definition image while updating image descriptions for screen-readers.
-
-### 4.3 Estimations & Pricing Calculation Systems
-Dynamically aggregates surcharges depending on selected sizes (XL Cushions add a `+$15.00` surcharge) and multiplies pricing metrics by quantity (limited from 1 to 10):
-$$\text{Total Price} = (\text{Base Price} + \text{Size Surcharge}) \times \text{Quantity}$$
-
-### 4.4 Interactive Customer Reviews Feed
-A customer reviews log is mounted inside frosted `Card` widgets. An entry form captures customer names and detailed reviews, prepending new comment card objects to the local feed array in real-time.
-
-### 4.5 Simulated Portal Cart & Checkout Overlay
-Adding items to the cart increments a glowing navigation badge. Clicking the cart button opens an accessible modal portaled to the DOM root, showing configured lists, subtotals, and checkouts that trigger success alerts.
+### 3.6 Modal Component Data Sheet
+A portal-based overlay card designed to isolate user actions.
+*   **Prop Registers:**
+    *   `isOpen` (*boolean, required*): Toggles modal visibility.
+    *   `title` (*string, required*): Core modal title.
+    *   `children` (*node, required*): Content details inside the modal overlay.
+    *   `onClose` (*function, required*): Close event callback handler.
+    *   `footer` (*node*): Modal footer actions (e.g. close, buy buttons).
+    *   `size` (*enum*): `'sm'`, `'md'`, `'lg'`, `'xl'`, `'full'`. Default: `'md'`.
+*   **A11y focus mechanics:**
+    *   Utilizes **React Portals** to mount modals directly inside the `document.body` DOM level.
+    *   **Focus-Trap:** Hooks keydown listeners to trap keyboard focus inside modal boundaries.
+    *   **ESC close:** Listens to Escape key presses to dismiss immediately.
+    *   **Scroll-Lock:** Sets body overflow to hidden to prevent background scroll leaks.
+*   **JSX Utilisation Example:**
+    ```jsx
+    import { Modal, Button } from '../components';
+    
+    <Modal
+      isOpen={isCartOpen}
+      title="Your Active Shopping Cart"
+      onClose={handleCloseCart}
+      size="md"
+      footer={<Button onClick={handleCloseCart}>Close Cart</Button>}
+    >
+      <div>You have selected 2x Aero-X1 Pro Spatial Audio Headset.</div>
+    </Modal>
+    ```
 
 ---
 
-## 5. DRY SYSTEM DESIGN & FILE DIRECTORY REGISTER
+## 4. ASSIGNMENT 2: E-Commerce PORTAL ARCHITECTURE & CONTROLLERS
 
-To enforce complete codebase compliance with **DRY (Don't Repeat Yourself)** principles, the two applications share the exact same reusable UI library directory:
+### 4.1 Mobile-First Media Query Grid Layouts
+The storefront implements strict responsive grids inside `ProductPage.module.css` to manage layout columns depending on viewport limits:
 
-```directory
-market/
-├── README.md                              # Master developer documentation
-├── presentation_deck.md                   # Technical slide deck representation
+```css
+/* Mobile stacked layout by default */
+.storePage__layoutGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Tablet Media Query (>= 640px) */
+@media (min-width: 640px) {
+  .storePage__layoutGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* Desktop Media Query (>= 1024px) */
+@media (min-width: 1024px) {
+  .storePage__layoutGrid {
+    grid-template-columns: 1fr 380px;  /* Main Content on Left, Checkout Sidebar on Right */
+    align-items: start;
+    gap: 48px;
+  }
+  .sidebar {
+    position: sticky;                  /* Sidebar card remains locked during scroll */
+    top: 40px;
+  }
+}
+```
+
+### 4.2 Product Gallery State Controller
+Tracks active thumb indices, allowing clean gallery exchanges:
+```javascript
+const [activeImageIndex, setActiveImageIndex] = useState(0);
+// Clicking thumbnail changes activeImageIndex
+<button onClick={() => setActiveImageIndex(idx)}>
+  <img src={img.src} alt="" />
+</button>
+```
+
+### 4.3 Estimated Surcharges & Pricing Computations
+Dynamically aggregates prices depending on cushion sizes and multipliers:
+```javascript
+const sizeSurcharge = selectedSize.id === 'xl-cushion' ? 15.00 : 0.00;
+const unitPrice = headsetProduct.price + sizeSurcharge;
+const totalPrice = (unitPrice * quantity).toFixed(2);
+```
+
+### 4.4 Interactive Customer Reviews State Array
+Verified customer reviews are modeled inside React state arrays. Submitting forms prepends comment cards instantly:
+```javascript
+const handleReviewSubmit = (e) => {
+  e.preventDefault();
+  const addedReview = {
+    id: reviewsList.length + 1,
+    author: newReviewAuthor,
+    date: 'Today',
+    rating: Number(newReviewRating),
+    content: newReviewContent
+  };
+  setReviewsList([addedReview, ...reviewsList]);
+};
+```
+
+### 4.5 Cart Modal Portal & Secure Checkout Simulator
+Tracks cart item structures inside `App.jsx`, calculates subtotal items, and flushes states on checkout clicks while spawning success banner alerts.
+
+---
+
+## 5. COMPREHENSIVE FILE DIRECTORY & STRUCTURAL TREE
+
+The complete file layout register within the user workspace is detailed below:
+
+```text
+market/                                    # Workspace Root Directory
+├── README.md                              # Master Technical Overview & Setup Manual
+├── presentation_deck.md                   # Slide-by-slide PowerPoint markdown template
+├── technical_documentation.md             # Detailed System Specification (This document)
+├── .gitignore                             # Excludes node_modules/ & build outputs from Git
 │
-├── assignment-1/src/components/           # Original Component Library
-│   ├── Button/ [Button.jsx, module.module.css, index.js]
-│   ├── Card/   [Card.jsx, module.module.css, index.js]
-│   ├── Input/  [Input.jsx, module.module.css, index.js]
-│   ├── Badge/  [Badge.jsx, module.module.css, index.js]
-│   ├── Alert/  [Alert.jsx, module.module.css, index.js]
-│   ├── Modal/  [Modal.jsx, module.module.css, index.js]
-│   └── index.js                           # aggregator aggregator index
+├── assignment-1/                          # Foundational Component Library Suite
+│   ├── package.json                       # Defines library packages and dependencies
+│   ├── package-lock.json                  # Strict dependency lock tree
+│   ├── vite.config.js                     # Vite build and compiler rules
+│   ├── eslint.config.js                   # Standard JavaScript syntax validator rules
+│   ├── index.html                         # Primary HTML mount skeleton
+│   ├── public/
+│   │   ├── favicon.svg                    # Floating header logo tab icon
+│   │   └── icons.svg                      # Static vector symbols package
+│   └── src/
+│       ├── main.jsx                       # mounts React App in StrictMode
+│       ├── index.css                      # Google Fonts and global HSL variables
+│       ├── App.jsx                        # Interactive components showcase dashboard
+│       ├── App.css                        # Layout structure grids and orb lights
+│       └── components/                    # Reusable components collection
+│           ├── index.js                   # central aggregated consolidator exports
+│           ├── Button/  [Button.jsx, module.module.css, index.js]
+│           ├── Card/    [Card.jsx, module.module.css, index.js]
+│           ├── Input/   [Input.jsx, module.module.css, index.js]
+│           ├── Badge/   [Badge.jsx, module.module.css, index.js]
+│           ├── Alert/   [Alert.jsx, module.module.css, index.js]
+│           └── Modal/   [Modal.jsx, module.module.css, index.js]
 │
-└── assignment-2/src/components/           # 100% DRY Copied Component Library
-    ├── Button/ [Button.jsx, module.module.css, index.js]
-    ├── Card/   [Card.jsx, module.module.css, index.js]
-    ├── Input/  [Input.jsx, module.module.css, index.js]
-    ├── Badge/  [Badge.jsx, module.module.css, index.js]
-    ├── Alert/  [Alert.jsx, module.module.css, index.js]
-    ├── Modal/  [Modal.jsx, module.module.css, index.js]
-    └── index.js                           # aggregator aggregator index
+└── assignment-2/                          # Immersive E-Commerce Cyberpunk Storefront
+    ├── package.json                       # Stores e-commerce dependencies
+    ├── package-lock.json                  # Stores e-commerce dependency locks
+    ├── vite.config.js                     # Configures Vite bundlers for Assignment 2
+    ├── eslint.config.js                   # Scopes ESLint rules
+    ├── index.html                         # Mounts storefront DOM root
+    ├── public/                            # High-fidelity mock product graphics
+    │   ├── headset-main.png               # Pedestal main device display image
+    │   ├── headset-detail.png             # Carbon fiber carbon hinge close-up detail image
+    │   └── headset-dock.png               # Folded charging dock case display image
+    └── src/
+        ├── main.jsx                       # Mounts storefront React root
+        ├── index.css                      # Cohesive Slate-Dark design styling sheet
+        ├── App.jsx                        # Storefront shell, cart count triggers & checkout modals
+        ├── App.css                        # Header bars, logo pulsing, and cart overlay items
+        ├── components/                    # 100% DRY Copied Component Library
+        │   ├── index.js                   # Consolidated Aggregators
+        │   ├── Button/  [Button.jsx, module.module.css, index.js]
+        │   ├── Card/    [Card.jsx, module.module.css, index.js]
+        │   ├── Input/   [Input.jsx, module.module.css, index.js]
+        │   ├── Badge/   [Badge.jsx, module.module.css, index.js]
+        │   ├── Alert/   [Alert.jsx, module.module.css, index.js]
+        │   └── Modal/   [Modal.jsx, module.module.css, index.js]
+        └── pages/
+            └── ProductPage/               # Immersive storefront section
+                ├── ProductPage.jsx        # Product config panels, gallery dials, specs & reviews form
+                └── ProductPage.module.css # Media-queries column splits, checkout sidebars
 ```
 
 ---
 
-## 6. INSTALLATION GUIDE & COMPILATION PROTOCOLS
+## 6. INSTALLATION PROTOCOLS & LOCAL ENVIRONMENT DEPLOYMENT
 
-Follow these standard commands in your console to install packages, launch local hot-rebuilding dev servers, or verify production builds:
+Follow these standard commands in your CLI console to launch local development environments:
 
-### Running Assignment 1 (Component Library Suite)
+### Launching Assignment 1 (Component Library)
 ```powershell
 cd assignment-1
 npm install
 npm run dev
 ```
 
-### Running Assignment 2 (Responsive E-Commerce Store)
+### Launching Assignment 2 (Responsive E-Commerce Store)
 ```powershell
 cd assignment-2
 npm install
 npm run dev
 ```
 
-### Production Build Compilation Verification
-```powershell
-# Compiles bundles inside the /dist folder with zero compile warnings
-npm run build
-```
-
 ---
 
-## 7. VERIFICATION REPORT & GIT PUSH LOGS
+## 7. BUILD COMPILATION & VERIFIED GIT PRODUCTION LOGS
 
-*   **Production Build Checks:** Both folders have been tested with the Vite compilation bundle command (`npm run build`). Both generated fully optimized distribution scripts (`/dist`) with zero warnings.
-*   **Git Repository Launch:** The entire `market/` root directory has been initialized as an active git workspace, staging all source directories while ignoring bulky packages via `.gitignore`.
-*   **Active Remote Hub:** All files have been successfully pushed to your remote repository branch on the main branch:
+*   **Verified Production Builds:** Compiled via Vite (`npm run build`). Both generated optimized bundles with zero syntax, scoping, or asset warnings.
+*   **Git Staged Push Completed:** The entire workspace has been staged, committed, and pushed onto your remote repository:
     *   **Repository URL:** [https://github.com/akash2236/library.git](https://github.com/akash2236/library.git)
-    *   **Commit Hash:** `d47e87f` (docs: add comprehensive technical PPT presentation deck)
+    *   **Main Branch Commit:** `639d5fb` (docs: add formal project report word-template specs)
